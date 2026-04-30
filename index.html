@@ -1,107 +1,1601 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>美妆主图制作</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%);
-            min-height: 100vh;
-        }
-        .header {
-            text-align: center;
-            padding: 40px 20px 30px;
-            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
-            color: white;
-            box-shadow: 0 4px 20px rgba(219, 39, 119, 0.3);
-        }
-        .header h1 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            letter-spacing: 2px;
-        }
-        .header p {
-            font-size: 1rem;
-            opacity: 0.95;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        .main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-        .app-wrapper {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(219, 39, 119, 0.15);
-            overflow: hidden;
-            min-height: 700px;
-        }
-        #app {
-            width: 100%;
-            min-height: 700px;
-        }
-        .footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: #be185d;
-            font-size: 0.9rem;
-        }
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.6rem;
-            }
-            .header p {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent智能体定制服务 | 专业Agent开发</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========== CSS Variables ========== */
+    :root {
+      /* Color Palette - Warm Dark Theme with Orange Accent */
+      --bg-primary: oklch(12% 0.015 50);
+      --bg-secondary: oklch(16% 0.015 50);
+      --bg-tertiary: oklch(20% 0.015 50);
+      --bg-elevated: oklch(24% 0.015 50);
+      
+      --text-primary: oklch(95% 0.01 60);
+      --text-secondary: oklch(70% 0.02 60);
+      --text-tertiary: oklch(50% 0.02 60);
+      
+      --accent: oklch(70% 0.18 50);
+      --accent-hover: oklch(75% 0.2 50);
+      --accent-muted: oklch(40% 0.12 50);
+      
+      --border: oklch(28% 0.015 50);
+      --border-accent: oklch(35% 0.08 50);
+      
+      /* Typography Scale */
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.6vw, 1.25rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+      --text-2xl: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+      --text-3xl: clamp(2.5rem, 2rem + 3vw, 4rem);
+      
+      /* Spacing Scale (4pt base) */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-24: 6rem;
+      --space-32: 8rem;
+      
+      /* Layout */
+      --container: min(90%, 1200px);
+      --container-narrow: min(85%, 800px);
+      
+      /* Transitions */
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-fast: 150ms;
+      --duration-normal: 300ms;
+      --duration-slow: 500ms;
+    }
+
+    /* ========== Reset & Base ========== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 400;
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--text-primary);
+      background-color: var(--bg-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ========== Typography ========== */
+    h1, h2, h3, h4 {
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    h1 { font-size: var(--text-3xl); }
+    h2 { font-size: var(--text-2xl); }
+    h3 { font-size: var(--text-xl); }
+    h4 { font-size: var(--text-lg); }
+
+    p {
+      color: var(--text-secondary);
+      max-width: 65ch;
+    }
+
+    /* ========== Layout Utilities ========== */
+    .container {
+      width: var(--container);
+      margin-inline: auto;
+      padding-inline: var(--space-6);
+    }
+
+    .container--narrow {
+      width: var(--container-narrow);
+    }
+
+    section {
+      padding-block: var(--space-24);
+    }
+
+    /* ========== Buttons ========== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-6);
+      font-family: inherit;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all var(--duration-normal) var(--ease-out-expo);
+    }
+
+    .btn--primary {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+
+    .btn--primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn--ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn--large {
+      padding: var(--space-4) var(--space-8);
+      font-size: var(--text-base);
+    }
+
+    /* ========== Header ========== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: var(--space-4) 0;
+      background: linear-gradient(to bottom, var(--bg-primary) 60%, transparent);
+      backdrop-filter: blur(8px);
+    }
+
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Noto Serif SC', serif;
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .logo__icon {
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-sm);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .nav__link {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color var(--duration-fast);
+    }
+
+    .nav__link:hover {
+      color: var(--text-primary);
+    }
+
+    /* ========== Hero Section ========== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: var(--space-24);
+      padding-bottom: var(--space-32);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-muted) 0%, transparent 70%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: var(--text-xs);
+      color: var(--text-secondary);
+      margin-bottom: var(--space-6);
+    }
+
+    .hero__badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero__title {
+      margin-bottom: var(--space-6);
+    }
+
+    .hero__title-accent {
+      color: var(--accent);
+    }
+
+    .hero__subtitle {
+      font-size: var(--text-xl);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: var(--space-8);
+      max-width: 600px;
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+
+    .hero__stats {
+      display: flex;
+      gap: var(--space-12);
+      margin-top: var(--space-16);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--border);
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .stat__value {
+      font-family: 'Outfit', sans-serif;
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat__label {
+      font-size: var(--text-sm);
+      color: var(--text-tertiary);
+    }
+
+    /* ========== Section Headers ========== */
+    .section-header {
+      margin-bottom: var(--space-16);
+    }
+
+    .section-header--center {
+      text-align: center;
+    }
+
+    .section-header__label {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: var(--space-3);
+    }
+
+    .section-header__title {
+      margin-bottom: var(--space-4);
+    }
+
+    .section-header__desc {
+      font-size: var(--text-lg);
+      color: var(--text-secondary);
+      max-width: 600px;
+    }
+
+    .section-header--center .section-header__desc {
+      margin-inline: auto;
+    }
+
+    /* ========== Cases Section ========== */
+    .cases {
+      background: var(--bg-secondary);
+    }
+
+    .cases__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6);
+    }
+
+    .case-card {
+      position: relative;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: var(--space-8);
+      overflow: hidden;
+      transition: all var(--duration-normal) var(--ease-out-expo);
+    }
+
+    .case-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+    }
+
+    .case-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity var(--duration-normal);
+    }
+
+    .case-card:hover::before {
+      opacity: 1;
+    }
+
+    .case-card--featured {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+      align-items: center;
+    }
+
+    .case-card__icon {
+      width: 56px;
+      height: 56px;
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: var(--space-4);
+    }
+
+    .case-card--featured .case-card__icon {
+      width: 72px;
+      height: 72px;
+      font-size: 32px;
+      margin-bottom: 0;
+    }
+
+    .case-card__tag {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-muted);
+      padding: var(--space-1) var(--space-3);
+      border-radius: 4px;
+      margin-bottom: var(--space-4);
+    }
+
+    .case-card__title {
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-3);
+    }
+
+    .case-card--featured .case-card__title {
+      font-size: var(--text-2xl);
+    }
+
+    .case-card__desc {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--space-6);
+    }
+
+    .case-card__features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    .case-card__feature {
+      font-size: var(--text-xs);
+      color: var(--text-tertiary);
+      background: var(--bg-tertiary);
+      padding: var(--space-1) var(--space-3);
+      border-radius: 4px;
+    }
+
+    .case-card__visual {
+      aspect-ratio: 4/3;
+      background: var(--bg-tertiary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .case-card__visual-placeholder {
+      font-size: 120px;
+      opacity: 0.15;
+    }
+
+    /* ========== Features Section ========== */
+    .features__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-6);
+    }
+
+    .feature {
+      text-align: center;
+      padding: var(--space-8) var(--space-4);
+    }
+
+    .feature__icon {
+      width: 64px;
+      height: 64px;
+      margin-inline: auto;
+      margin-bottom: var(--space-6);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      transition: all var(--duration-normal);
+    }
+
+    .feature:hover .feature__icon {
+      background: var(--accent-muted);
+      border-color: var(--accent);
+    }
+
+    .feature__title {
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-3);
+    }
+
+    .feature__desc {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ========== Process Section ========== */
+    .process {
+      background: var(--bg-secondary);
+    }
+
+    .process__timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+      position: relative;
+    }
+
+    .process__timeline::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: var(--border);
+    }
+
+    .process-step {
+      text-align: center;
+      position: relative;
+    }
+
+    .process-step__number {
+      width: 80px;
+      height: 80px;
+      margin-inline: auto;
+      margin-bottom: var(--space-6);
+      background: var(--bg-primary);
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--text-tertiary);
+      position: relative;
+      z-index: 1;
+      transition: all var(--duration-normal);
+    }
+
+    .process-step:hover .process-step__number {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg-primary);
+    }
+
+    .process-step__title {
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-3);
+    }
+
+    .process-step__desc {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ========== Pricing Section ========== */
+    .pricing__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+
+    .pricing-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: var(--space-8);
+      position: relative;
+      transition: all var(--duration-normal) var(--ease-out-expo);
+    }
+
+    .pricing-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+    }
+
+    .pricing-card--featured {
+      background: var(--bg-tertiary);
+      border-color: var(--accent);
+    }
+
+    .pricing-card__badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--bg-primary);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      padding: var(--space-1) var(--space-4);
+      border-radius: 100px;
+    }
+
+    .pricing-card__name {
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-2);
+    }
+
+    .pricing-card__price {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-1);
+      margin-bottom: var(--space-6);
+    }
+
+    .pricing-card__currency {
+      font-size: var(--text-lg);
+      color: var(--text-tertiary);
+    }
+
+    .pricing-card__amount {
+      font-family: 'Outfit', sans-serif;
+      font-size: var(--text-3xl);
+      font-weight: 700;
+    }
+
+    .pricing-card__period {
+      font-size: var(--text-sm);
+      color: var(--text-tertiary);
+    }
+
+    .pricing-card__desc {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-6);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-card__features {
+      list-style: none;
+      margin-bottom: var(--space-8);
+    }
+
+    .pricing-card__feature {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      padding-block: var(--space-2);
+    }
+
+    .pricing-card__feature::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .pricing-card .btn {
+      width: 100%;
+    }
+
+    /* ========== Testimonials Section ========== */
+    .testimonials {
+      background: var(--bg-secondary);
+    }
+
+    .testimonials__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+
+    .testimonial {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: var(--space-8);
+    }
+
+    .testimonial__stars {
+      display: flex;
+      gap: var(--space-1);
+      margin-bottom: var(--space-4);
+      color: var(--accent);
+      font-size: var(--text-sm);
+    }
+
+    .testimonial__content {
+      font-size: var(--text-base);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--space-6);
+      font-style: italic;
+    }
+
+    .testimonial__author {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .testimonial__avatar {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-tertiary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .testimonial__name {
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+    }
+
+    .testimonial__role {
+      font-size: var(--text-sm);
+      color: var(--text-tertiary);
+    }
+
+    /* ========== CTA Section ========== */
+    .cta {
+      text-align: center;
+    }
+
+    .cta__title {
+      margin-bottom: var(--space-4);
+    }
+
+    .cta__desc {
+      font-size: var(--text-lg);
+      color: var(--text-secondary);
+      margin-bottom: var(--space-8);
+      max-width: 600px;
+      margin-inline: auto;
+    }
+
+    .cta__actions {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    /* ========== Footer ========== */
+    .footer {
+      padding: var(--space-12) 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer__copy {
+      font-size: var(--text-sm);
+      color: var(--text-tertiary);
+    }
+
+    .footer__links {
+      display: flex;
+      gap: var(--space-6);
+    }
+
+    .footer__link {
+      font-size: var(--text-sm);
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color var(--duration-fast);
+    }
+
+    .footer__link:hover {
+      color: var(--text-primary);
+    }
+
+    /* ========== Chat Widget ========== */
+    .chat-widget {
+      position: fixed;
+      bottom: var(--space-8);
+      right: var(--space-8);
+      z-index: 1000;
+    }
+
+    .chat-toggle {
+      width: 60px;
+      height: 60px;
+      background: var(--accent);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--bg-primary);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: all var(--duration-normal) var(--ease-out-expo);
+    }
+
+    .chat-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .chat-toggle--active {
+      transform: rotate(180deg);
+    }
+
+    .chat-window {
+      position: absolute;
+      bottom: 80px;
+      right: 0;
+      width: 380px;
+      max-height: 520px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px) scale(0.95);
+      transition: all var(--duration-normal) var(--ease-out-expo);
+    }
+
+    .chat-window--open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-4) var(--space-6);
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .chat-header__title {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .chat-header__status {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+    }
+
+    .chat-close {
+      width: 32px;
+      height: 32px;
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      font-size: 20px;
+      transition: all var(--duration-fast);
+    }
+
+    .chat-close:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--space-4) var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .chat-message {
+      max-width: 85%;
+      padding: var(--space-3) var(--space-4);
+      border-radius: 12px;
+      font-size: var(--text-sm);
+      line-height: 1.5;
+      animation: messageIn 0.3s var(--ease-out-expo);
+    }
+
+    @keyframes messageIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .chat-message--bot {
+      align-self: flex-start;
+      background: var(--bg-tertiary);
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-message--user {
+      align-self: flex-end;
+      background: var(--accent);
+      color: var(--bg-primary);
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-message--typing {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+    }
+
+    .chat-message--typing span {
+      width: 8px;
+      height: 8px;
+      background: var(--text-tertiary);
+      border-radius: 50%;
+      animation: typingBounce 1.4s ease-in-out infinite;
+    }
+
+    .chat-message--typing span:nth-child(2) { animation-delay: 0.2s; }
+    .chat-message--typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-6px); }
+    }
+
+    .chat-input {
+      display: flex;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-6);
+      background: var(--bg-tertiary);
+      border-top: 1px solid var(--border);
+    }
+
+    .chat-input__field {
+      flex: 1;
+      padding: var(--space-3) var(--space-4);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: var(--text-sm);
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color var(--duration-fast);
+    }
+
+    .chat-input__field::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    .chat-input__field:focus {
+      border-color: var(--accent);
+    }
+
+    .chat-input__send {
+      width: 44px;
+      height: 44px;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bg-primary);
+      font-size: 18px;
+      transition: all var(--duration-fast);
+    }
+
+    .chat-input__send:hover {
+      background: var(--accent-hover);
+    }
+
+    .chat-input__send:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* ========== Scroll Animations ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all var(--duration-slow) var(--ease-out-expo);
+    }
+
+    .reveal--visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all var(--duration-normal) var(--ease-out-expo);
+    }
+
+    .reveal-stagger--visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
+    .reveal-stagger--visible > *:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: translateY(0); }
+    .reveal-stagger--visible > *:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: translateY(0); }
+    .reveal-stagger--visible > *:nth-child(4) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }
+    .reveal-stagger--visible > *:nth-child(5) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
+    .reveal-stagger--visible > *:nth-child(6) { transition-delay: 500ms; opacity: 1; transform: translateY(0); }
+
+    /* ========== Responsive Design ========== */
+    @media (max-width: 1024px) {
+      .features__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process__timeline {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-8);
+      }
+
+      .process__timeline::before {
+        display: none;
+      }
+
+      .pricing__grid {
+        gap: var(--space-4);
+      }
+
+      .testimonials__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .testimonials__grid > *:last-child {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding-block: var(--space-16);
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .hero__stats {
+        flex-direction: column;
+        gap: var(--space-6);
+      }
+
+      .cases__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-card--featured {
+        grid-column: span 1;
+        grid-template-columns: 1fr;
+      }
+
+      .case-card__visual {
+        display: none;
+      }
+
+      .features__grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+      }
+
+      .feature {
+        padding: var(--space-6);
+        text-align: left;
+        display: flex;
+        gap: var(--space-6);
+        align-items: flex-start;
+      }
+
+      .feature__icon {
+        margin: 0;
+        flex-shrink: 0;
+      }
+
+      .process__timeline {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+
+      .pricing__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-card--featured {
+        order: -1;
+      }
+
+      .testimonials__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonials__grid > *:last-child {
+        grid-column: span 1;
+      }
+
+      .footer__inner {
+        flex-direction: column;
+        gap: var(--space-4);
+        text-align: center;
+      }
+
+      .chat-window {
+        width: calc(100vw - var(--space-8));
+        right: calc(-1 * var(--space-4));
+        max-height: 70vh;
+      }
+
+      .chat-widget {
+        bottom: var(--space-4);
+        right: var(--space-4);
+      }
+    }
+  </style>
 </head>
 <body>
-    <header class="header">
-        <h1>💄 美妆主图制作</h1>
-        <p>AI 智能美妆主图设计工具，轻松创作专业级电商主图，让您的产品脱颖而出</p>
-    </header>
-    
-    <main class="main-container">
-        <div class="app-wrapper">
-            <div id="app"></div>
-        </div>
-    </main>
-    
-    <footer class="footer">
-        <p>Powered by Coze · 让创意触手可及</p>
-    </footer>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="logo">
+        <span class="logo__icon">⚡</span>
+        <span>AgentLab</span>
+      </a>
+      <nav class="nav">
+        <a href="#cases" class="nav__link">案例展示</a>
+        <a href="#features" class="nav__link">服务优势</a>
+        <a href="#process" class="nav__link">服务流程</a>
+        <a href="#pricing" class="nav__link">价格方案</a>
+        <a href="#contact" class="btn btn--primary">立即咨询</a>
+      </nav>
+    </div>
+  </header>
 
-    <script type="text/javascript">
-        var webSdkScript = document.createElement('script');
-        webSdkScript.src = 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/web-sdk/latest.js';
-        webSdkScript.onload = function() {
-            new CozeWebSDK.AppWebSDK({
-                token: 'cztei_lryCQaumRQHFeSYH3tpzinUVzsGXWwtbzB3x5Ej0uGil5vSywqa1VJUjd35iQCVHa',
-                appId: '7634361117598285867',
-                container: '#app',
-                userInfo: {
-                    id: 'user',
-                    url: 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
-                    nickname: 'User',
-                },
-                ui: {
-                    className: '',
-                }
-            });
-        };
-        document.body.appendChild(webSdkScript);
-    </script>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero__content">
+      <div class="hero__badge">
+        <span class="hero__badge-dot"></span>
+        <span>专注企业级AI Agent定制开发</span>
+      </div>
+      <h1 class="hero__title">
+        <span class="hero__title-accent">AI Agent</span><br>
+        智能体定制服务
+      </h1>
+      <p class="hero__subtitle">
+        从场景分析到落地部署，一站式打造企业专属的智能助手。我们已帮助超过200家企业实现业务流程自动化，平均提升效率300%。
+      </p>
+      <div class="hero__actions">
+        <a href="#contact" class="btn btn--primary btn--large">免费获取方案</a>
+        <a href="#cases" class="btn btn--ghost btn--large">查看成功案例</a>
+      </div>
+      <div class="hero__stats">
+        <div class="stat">
+          <span class="stat__value">200+</span>
+          <span class="stat__label">服务企业</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">300%</span>
+          <span class="stat__label">效率提升</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">48h</span>
+          <span class="stat__label">快速交付</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cases Section -->
+  <section class="cases" id="cases">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="section-header__label">成功案例</span>
+        <h2 class="section-header__title">赋能多行业智能化升级</h2>
+        <p class="section-header__desc">不同场景，定制化解决方案</p>
+      </div>
+      
+      <div class="cases__grid reveal-stagger">
+        <!-- Featured Case -->
+        <div class="case-card case-card--featured">
+          <div class="case-card__content">
+            <span class="case-card__tag">电商零售</span>
+            <h3 class="case-card__title">智能客服Agent</h3>
+            <p class="case-card__desc">
+              7×24小时即时响应客户咨询，智能理解用户意图，自动处理订单查询、退换货、优惠活动等常见问题。接入后人工客服压力降低70%，客户满意度提升至96%。
+            </p>
+            <div class="case-card__features">
+              <span class="case-card__feature">自然语言理解</span>
+              <span class="case-card__feature">多轮对话</span>
+              <span class="case-card__feature">知识库检索</span>
+              <span class="case-card__feature">工单自动创建</span>
+            </div>
+          </div>
+          <div class="case-card__visual">
+            <span class="case-card__visual-placeholder">🛒</span>
+          </div>
+        </div>
+
+        <!-- Case 2 -->
+        <div class="case-card">
+          <div class="case-card__icon">💼</div>
+          <span class="case-card__tag">企业销售</span>
+          <h3 class="case-card__title">销售助手Pro</h3>
+          <p class="case-card__desc">
+            智能分析客户画像，自动生成个性化销售话术，实时提供产品推荐和报价建议，让销售团队成单率提升45%。
+          </p>
+          <div class="case-card__features">
+            <span class="case-card__feature">客户画像分析</span>
+            <span class="case-card__feature">话术推荐</span>
+            <span class="case-card__feature">报价自动化</span>
+          </div>
+        </div>
+
+        <!-- Case 3 -->
+        <div class="case-card">
+          <div class="case-card__icon">✍️</div>
+          <span class="case-card__tag">内容运营</span>
+          <h3 class="case-card__title">内容创作Agent</h3>
+          <p class="case-card__desc">
+            批量生成高质量营销文案，支持多平台适配（小红书、抖音、公众号），一键生成配图建议和标签策略。
+          </p>
+          <div class="case-card__features">
+            <span class="case-card__feature">多风格文案</span>
+            <span class="case-card__feature">平台适配</span>
+            <span class="case-card__feature">SEO优化</span>
+          </div>
+        </div>
+
+        <!-- Case 4 -->
+        <div class="case-card">
+          <div class="case-card__icon">📊</div>
+          <span class="case-card__tag">数据处理</span>
+          <h3 class="case-card__title">数据分析助手</h3>
+          <p class="case-card__desc">
+            智能解读数据报表，自动生成可视化图表和业务洞察报告，用自然语言即可完成复杂的数据查询和分析。
+          </p>
+          <div class="case-card__features">
+            <span class="case-card__feature">自然语言查询</span>
+            <span class="case-card__feature">报表生成</span>
+            <span class="case-card__feature">趋势预测</span>
+          </div>
+        </div>
+
+        <!-- Case 5 - 美妆主图制作 -->
+        <div class="case-card">
+          <div class="case-card__icon">💄</div>
+          <span class="case-card__tag">电商美妆</span>
+          <h3 class="case-card__title">美妆主图制作</h3>
+          <p class="case-card__desc">
+            AI一键生成电商美妆产品主图及小红书风格配图，智能换产品、换背景，高效出图提升转化率。
+          </p>
+          <div class="case-card__features">
+            <span class="case-card__feature">智能换图</span>
+            <span class="case-card__feature">小红书风格</span>
+            <span class="case-card__feature">批量出图</span>
+          </div>
+          <div style="margin-top: 12px;">
+            <a href="javascript:void(0)" class="btn btn--primary" onclick="openMeizhuApp()" style="font-size: 13px; padding: 8px 20px;">在线体验</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="section-header__label">为什么选择我们</span>
+        <h2 class="section-header__title">专业能力，值得信赖</h2>
+      </div>
+      
+      <div class="features__grid reveal-stagger">
+        <div class="feature">
+          <div class="feature__icon">🎯</div>
+          <div>
+            <h4 class="feature__title">场景深度适配</h4>
+            <p class="feature__desc">深入理解您的业务场景，定制专属Agent，而非通用模板的简单套用。</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature__icon">🔧</div>
+          <div>
+            <h4 class="feature__title">灵活集成对接</h4>
+            <p class="feature__desc">支持与企业现有系统（CRM、ERP、OA）无缝对接，数据互通，开箱即用。</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature__icon">🛡️</div>
+          <div>
+            <h4 class="feature__title">企业级安全保障</h4>
+            <p class="feature__desc">私有化部署选项，数据不出企业，符合等保合规要求，银行级加密传输。</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature__icon">🚀</div>
+          <div>
+            <h4 class="feature__title">持续迭代优化</h4>
+            <p class="feature__desc">上线不是终点，持续根据使用反馈优化Agent能力，越用越聪明。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="section-header__label">服务流程</span>
+        <h2 class="section-header__title">高效协作，快速落地</h2>
+        <p class="section-header__desc">标准化流程确保项目高质量交付</p>
+      </div>
+      
+      <div class="process__timeline reveal-stagger">
+        <div class="process-step">
+          <div class="process-step__number">01</div>
+          <h4 class="process-step__title">需求沟通</h4>
+          <p class="process-step__desc">深入了解您的业务场景、痛点和目标，明确Agent的核心功能与性能指标。</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step__number">02</div>
+          <h4 class="process-step__title">方案设计</h4>
+          <p class="process-step__desc">技术架构设计、知识库梳理、对话流程设计，提供完整的技术方案文档。</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step__number">03</div>
+          <h4 class="process-step__title">开发部署</h4>
+          <p class="process-step__desc">敏捷开发迭代，自动化测试验证，专业团队确保系统稳定上线。</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step__number">04</div>
+          <h4 class="process-step__title">持续优化</h4>
+          <p class="process-step__desc">上线后持续监控效果，根据真实数据优化模型，让Agent能力不断提升。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="section-header__label">透明定价</span>
+        <h2 class="section-header__title">选择适合您的方案</h2>
+        <p class="section-header__desc">按需付费，无隐藏费用</p>
+      </div>
+      
+      <div class="pricing__grid reveal-stagger">
+        <div class="pricing-card">
+          <h4 class="pricing-card__name">基础版</h4>
+          <div class="pricing-card__price">
+            <span class="pricing-card__currency">¥</span>
+            <span class="pricing-card__amount">9,800</span>
+            <span class="pricing-card__period">/月起</span>
+          </div>
+          <p class="pricing-card__desc">适合单一场景使用，快速验证AI Agent效果</p>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature">1个核心Agent开发</li>
+            <li class="pricing-card__feature">基础知识库配置</li>
+            <li class="pricing-card__feature">标准API接口对接</li>
+            <li class="pricing-card__feature">7×8小时技术支持</li>
+            <li class="pricing-card__feature">月度效果报告</li>
+          </ul>
+          <a href="#contact" class="btn btn--ghost">立即咨询</a>
+        </div>
+        
+        <div class="pricing-card pricing-card--featured">
+          <span class="pricing-card__badge">最受欢迎</span>
+          <h4 class="pricing-card__name">专业版</h4>
+          <div class="pricing-card__price">
+            <span class="pricing-card__currency">¥</span>
+            <span class="pricing-card__amount">29,800</span>
+            <span class="pricing-card__period">/月起</span>
+          </div>
+          <p class="pricing-card__desc">多场景联动，覆盖完整业务流程</p>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature">3个Agent协同工作</li>
+            <li class="pricing-card__feature">高级知识库管理</li>
+            <li class="pricing-card__feature">深度系统集成</li>
+            <li class="pricing-card__feature">7×24小时专属支持</li>
+            <li class="pricing-card__feature">周度优化迭代</li>
+            <li class="pricing-card__feature">私有化部署选项</li>
+          </ul>
+          <a href="#contact" class="btn btn--primary">立即咨询</a>
+        </div>
+        
+        <div class="pricing-card">
+          <h4 class="pricing-card__name">企业版</h4>
+          <div class="pricing-card__price">
+            <span class="pricing-card__currency">¥</span>
+            <span class="pricing-card__amount">定制</span>
+            <span class="pricing-card__period">报价</span>
+          </div>
+          <p class="pricing-card__desc">集团级部署，复杂场景深度定制</p>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature">无限制Agent数量</li>
+            <li class="pricing-card__feature">全链路数据洞察</li>
+            <li class="pricing-card__feature">定制化模型训练</li>
+            <li class="pricing-card__feature">专属成功经理</li>
+            <li class="pricing-card__feature"> SLA服务保障</li>
+            <li class="pricing-card__feature">驻场服务支持</li>
+          </ul>
+          <a href="#contact" class="btn btn--ghost">联系我们</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="section-header__label">客户评价</span>
+        <h2 class="section-header__title">来自真实客户的反馈</h2>
+      </div>
+      
+      <div class="testimonials__grid reveal-stagger">
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__content">
+            "上线3个月后，我们客服团队的人工介入率从80%降到了15%。更重要的是，客户满意度从82%提升到了96%，这个数字是我们之前想都不敢想的。"
+          </p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">王</div>
+            <div>
+              <div class="testimonial__name">王明</div>
+              <div class="testimonial__role">某电商平台运营总监</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__content">
+            "销售助手帮我们打通了客户数据到成交流程的最后一环。新人上手时间从2周缩短到2天，销售团队的月度业绩平均提升了38%。"
+          </p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">李</div>
+            <div>
+              <div class="testimonial__name">李婷</div>
+              <div class="testimonial__role">B2B SaaS公司销售负责人</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__content">
+            "技术团队非常专业，从需求梳理到交付只用了2周。后期运维响应速度很快，有问题基本上当天就能解决。强烈推荐！"
+          </p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">张</div>
+            <div>
+              <div class="testimonial__name">张伟</div>
+              <div class="testimonial__role">传统制造业IT总监</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta" id="contact">
+    <div class="container container--narrow">
+      <h2 class="cta__title reveal">准备好开始了吗？</h2>
+      <p class="cta__desc reveal">
+        留下您的联系方式，我们的专家将在24小时内与您联系，为您免费评估需求并提供定制化方案。
+      </p>
+      <div class="cta__actions reveal">
+        <a href="javascript:void(0)" class="btn btn--primary btn--large" onclick="openChat()">
+          💬 立即在线咨询
+        </a>
+        <a href="mailto:contact@agentlab.com" class="btn btn--ghost btn--large">
+          ✉️ 发送邮件咨询
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__copy">© 2024 AgentLab. All rights reserved.</p>
+      <div class="footer__links">
+        <a href="#" class="footer__link">隐私政策</a>
+        <a href="#" class="footer__link">服务条款</a>
+        <a href="#" class="footer__link">联系我们</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 美妆主图制作 Web SDK -->
+  <script>
+    var meizhuSdkLoaded = false;
+    var meizhuSdkScript = document.createElement('script');
+    meizhuSdkScript.src = 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/web-sdk/latest.js';
+    meizhuSdkScript.onload = function() { meizhuSdkLoaded = true; };
+    document.head.appendChild(meizhuSdkScript);
+
+    function openMeizhuApp() {
+      var existing = document.getElementById('meizhu-modal');
+      if (existing) {
+        existing.style.display = 'flex';
+        return;
+      }
+      
+      var modal = document.createElement('div');
+      modal.id = 'meizhu-modal';
+      modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:10000;display:flex;justify-content:center;align-items:center;';
+      
+      var inner = document.createElement('div');
+      inner.style.cssText = 'position:relative;width:90%;max-width:900px;height:80vh;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3);';
+      
+      var closeBtn = document.createElement('button');
+      closeBtn.innerHTML = '✕';
+      closeBtn.style.cssText = 'position:absolute;top:12px;right:16px;z-index:10001;background:#333;color:#fff;border:none;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
+      closeBtn.onclick = function() { modal.style.display = 'none'; };
+      
+      var sdkContainer = document.createElement('div');
+      sdkContainer.id = 'meizhu-app-container';
+      sdkContainer.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;';
+      
+      inner.appendChild(closeBtn);
+      inner.appendChild(sdkContainer);
+      modal.appendChild(inner);
+      document.body.appendChild(modal);
+      
+      modal.onclick = function(e) { if (e.target === modal) modal.style.display = 'none'; };
+
+      function initSdk() {
+        if (typeof CozeWebSDK !== 'undefined') {
+          new CozeWebSDK.AppWebSDK({
+            token: 'cztei_lryCQaumRQHFeSYH3tpzinUVzsGXWwtbzB3x5Ej0uGil5vSywqa1VJUjd35iQCVHa',
+            appId: '7634361117598285867',
+            container: '#meizhu-app-container',
+            userInfo: {
+              id: 'user',
+              url: 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
+              nickname: 'User',
+            },
+            ui: { className: '' }
+          });
+        } else {
+          setTimeout(initSdk, 300);
+        }
+      }
+      initSdk();
+    }
+  </script>
+
 </body>
 </html>
