@@ -1287,6 +1287,24 @@
             <span class="case-card__feature">趋势预测</span>
           </div>
         </div>
+
+        <!-- Case 5 - 美妆主图制作 -->
+        <div class="case-card">
+          <div class="case-card__icon">💄</div>
+          <span class="case-card__tag">电商美妆</span>
+          <h3 class="case-card__title">美妆主图制作</h3>
+          <p class="case-card__desc">
+            AI一键生成电商美妆产品主图及小红书风格配图，智能换产品、换背景，高效出图提升转化率。
+          </p>
+          <div class="case-card__features">
+            <span class="case-card__feature">智能换图</span>
+            <span class="case-card__feature">小红书风格</span>
+            <span class="case-card__feature">批量出图</span>
+          </div>
+          <div style="margin-top: 12px;">
+            <a href="javascript:void(0)" class="btn btn--primary" onclick="openMeizhuApp()" style="font-size: 13px; padding: 8px 20px;">在线体验</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1519,6 +1537,57 @@
       </div>
     </div>
   </footer>
+
+  <!-- 美妆主图制作 Web SDK -->
+  <script>
+    var meizhuSdkScript = document.createElement('script');
+    meizhuSdkScript.src = 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/web-sdk/latest.js';
+    meizhuSdkScript.onload = function() {};
+    document.head.appendChild(meizhuSdkScript);
+
+    function openMeizhuApp() {
+      var existing = document.getElementById('meizhu-modal');
+      if (existing) {
+        existing.style.display = 'flex';
+        return;
+      }
+      
+      var modal = document.createElement('div');
+      modal.id = 'meizhu-modal';
+      modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:10000;display:flex;justify-content:center;align-items:center;';
+      
+      var inner = document.createElement('div');
+      inner.style.cssText = 'position:relative;width:90%;max-width:900px;height:80vh;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3);';
+      
+      var closeBtn = document.createElement('button');
+      closeBtn.innerHTML = '✕';
+      closeBtn.style.cssText = 'position:absolute;top:12px;right:16px;z-index:10001;background:#333;color:#fff;border:none;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
+      closeBtn.onclick = function() { modal.style.display = 'none'; };
+      
+      var sdkContainer = document.createElement('div');
+      sdkContainer.id = 'meizhu-app-container';
+      sdkContainer.style.cssText = 'width:100%;height:100%;';
+      
+      inner.appendChild(closeBtn);
+      inner.appendChild(sdkContainer);
+      modal.appendChild(inner);
+      document.body.appendChild(modal);
+      
+      modal.onclick = function(e) { if (e.target === modal) modal.style.display = 'none'; };
+      
+      new CozeWebSDK.AppWebSDK({
+        token: 'cztei_lryCQaumRQHFeSYH3tpzinUVzsGXWwtbzB3x5Ej0uGil5vSywqa1VJUjd35iQCVHa',
+        appId: '7634361117598285867',
+        container: '#meizhu-app-container',
+        userInfo: {
+          id: 'user',
+          url: 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
+          nickname: 'User',
+        },
+        ui: { className: '' }
+      });
+    }
   </script>
+
 </body>
 </html>
