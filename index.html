@@ -1,32 +1,107 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>美妆主图制作 - AI智能美妆主图设计工具</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; overflow: hidden; }
-    #app { width: 100%; height: 100%; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美妆主图制作 - AI智能美妆主图设计工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%);
+            min-height: 100vh;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(219, 39, 119, 0.3);
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+        .header p {
+            font-size: 1rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .app-wrapper {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(219, 39, 119, 0.15);
+            overflow: hidden;
+            min-height: 700px;
+        }
+        #app {
+            width: 100%;
+            min-height: 700px;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #be185d;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .header p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div id="app"></div>
-  <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/builder-web-sdk/0.1.0/dist/umd/index.js"></script>
-  <script>
-    new CozeWebSDK.AppWebSDK({
-      token: 'cztei_lryCQaumRQHFeSYH3tpzinUVzsGXWwtbzB3x5Ej0uGil5vSywqa1VJUjd35iQCVHa',
-      appId: '7634361117598285867',
-      container: '#app',
-      userInfo: {
-        id: 'user',
-        url: 'https://lf-coze-web-cdn.coze.cn/obj/coze-web-cn/obric/coze/favicon.1970.png',
-        nickname: 'User',
-      },
-      ui: {
-        className: '',
-      }
-    });
-  </script>
+    <header class="header">
+        <h1>💄 美妆主图制作</h1>
+        <p>AI 智能美妆主图设计工具，轻松创作专业级电商主图，让您的产品脱颖而出</p>
+    </header>
+    
+    <main class="main-container">
+        <div class="app-wrapper">
+            <div id="app"></div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>Powered by Coze · 让创意触手可及</p>
+    </footer>
+
+    <script type="text/javascript">
+        var webSdkScript = document.createElement('script');
+        webSdkScript.src = 'https://lf-cdn.coze.cn/obj/unpkg/flow-platform/builder-web-sdk/0.1.0/dist/umd/index.js';
+        webSdkScript.onload = function() {
+            new CozeWebSDK.AppWebSDK({
+                token: 'cztei_lryCQaumRQHFeSYH3tpzinUVzsGXWwtbzB3x5Ej0uGil5vSywqa1VJUjd35iQCVHa',
+                appId: '7634361117598285867',
+                container: '#app',
+                userInfo: {
+                    id: 'user',
+                    url: 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
+                    nickname: 'User',
+                },
+                ui: {
+                    className: '',
+                }
+            });
+        };
+        document.body.appendChild(webSdkScript);
+    </script>
 </body>
 </html>
